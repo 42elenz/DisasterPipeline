@@ -11,6 +11,10 @@
     The web app is able to process textmessages and classify them according according to the model, 
     and display statistics using graphical plots.
 
+![alt text] (https://github.com/solanhaben/DisasterPipeline/blob/master/example_classification.png "classification example")
+
+![alt text] (https://github.com/solanhaben/DisasterPipeline/blob/master/example_dashboard.png "dashboard example")
+
 ### File Descriptions
     data/process_data.py - The ETL script
     models/train_classifier - The ML script
