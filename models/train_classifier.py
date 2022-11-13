@@ -142,9 +142,7 @@ def build_model():
         model (BaseEstimator): Instance of the built pipeline.
     '''
     # defining hyperparameter for the MultiOutputClassifier.
-    params = {  
-        
-    }
+    params =  {'n_estimators': 200, 'min_samples_split': 4}
     # instanciating pipeline with customer tokenizer and StartingVerbExtractor.
     pipeline = Pipeline([
     ('features', FeatureUnion([
@@ -162,8 +160,8 @@ def evaluate_model(model, X_test, Y_test, category_names):
         to stdout.
     Arg:
         model (BaseEstimator): trained model to be evaluated
-        X_test (pd.Dataframe): predictor of training data
-        Y_test (pd.Dataframe): labels of training data
+        X_test (pd.Dataframe): predictor of test data
+        Y_test (pd.Dataframe): labels of test data
         category_names (list): class names
     Return:
          N/A.

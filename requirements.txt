@@ -1,0 +1,11 @@
+beautifulsoup4                4.6.0      
+Flask                         0.12.2       
+json5                         0.8.5      
+matplotlib                    2.1.0      
+nltk                          3.2.5      
+numpy                         1.12.1     
+pandas                        0.23.3     
+pip                           18.1       
+plotly                        2.0.15     
+scikit-learn                  0.19.1     
+SQLAlchemy                    1.1.13
