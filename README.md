@@ -14,19 +14,21 @@ and display statistics using graphical plots.
 ![alt text](https://github.com/solanhaben/DisasterPipeline/blob/master/example_dashboard.png "dashboard example")
 
 ### File Descriptions
-data/process_data.py - The ETL script
-models/train_classifier - The ML script
-app/run.py - The server for the website
-app/templates - The website HTML/CSS files
-data/*.csv - The dataset
+* data/process_data.py - The ETL script
+* models/train_classifier - The ML script
+* app/run.py - The server for the website
+* app/templates - The website HTML/CSS files
+* data/*.csv - The dataset
 
 ### Installation
-    Run pip install -r requirements.txt
+    pip install -r requirements.txt
 
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
-    To run ETL pipeline that cleans data and stores in database python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
-    To run ML pipeline that trains classifier and saves python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
+      * To run ETL pipeline that cleans data and stores in database 
+      `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db`
+      * To run ML pipeline that trains classifier and saves 
+      `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`
 2. Run the following command in the app's directory to run your web app. python run.py
 3. Go to http://0.0.0.0:3001/
 
@@ -38,6 +40,7 @@ Initial exploration of the data showed inbalance in the distrubtions of the clas
 This leads to two main problems:
 1. Evalutation of the model outcomes
 2. Training of our model
+
 
 1. Accuracy, can not be used to evaluate model predictions on imbalanced classes. 
 It does not distinguish between the numbers of correctly classified examples of different classes. 
