@@ -103,18 +103,14 @@ def tokenize(text):
     # replace each url in text string with placeholder
     for url in detected_urls:
         text = text.replace(url, 'urlsub')
-    # initiate Stemmer
-    stemmer = PorterStemmer()
     # initiate Lemmatizer
     lemmatizer =  WordNetLemmatizer()
     # removing special characters and tranforming capital letters
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower()).split()
     # removing stop words
     text_tokens = [word for word in text if word not in stopwords.words('english')]
-    # stemming tokens
-    text_stems = [stemmer.stem(word) for word in text_tokens]
     # lemmatize tokens
-    cleaned = [lemmatizer.lemmatize(word) for word in text_stems]
+    cleaned = [lemmatizer.lemmatize(word) for word in text_tokens]
     return cleaned
 
 

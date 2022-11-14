@@ -5,7 +5,7 @@ As a result the messages can be routed to the appropriate disaster relief agenci
 
 The data set was provided by Figure Eight containing real messages that were sent during disaster events. 
 Steps included building a basic ETL and Machine Learning pipeline as well as a webapp. 
-Text preprocessing was done using tokenizing, stemming and lemmatizing. 
+Text preprocessing was done using tokenizing and lemmatizing. 
 The multi-label classifier was built using the pipeline features of Scikit Learn. 
 Grid Search Cross Validation was used to tune the hyperparameters.
 The web app is able to process textmessages and classify them according according to the model, 

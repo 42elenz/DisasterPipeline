@@ -11,7 +11,6 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from nltk.stem import PorterStemmer
 
 # import sk-learn libraries
 from sklearn.pipeline import Pipeline
@@ -22,6 +21,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.model_selection import GridSearchCV
 
 # download NLTK package
 nltk.download(['stopwords', 'wordnet'])
@@ -117,41 +117,42 @@ def tokenize(text):
     # replace each url in text string with placeholder
     for url in detected_urls:
         text = text.replace(url, 'urlsub')
-    # initiate Stemmer
-    stemmer = PorterStemmer()
     # initiate Lemmatizer
     lemmatizer =  WordNetLemmatizer()
     # removing special characters and tranforming capital letters
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower()).split()
     # removing stop words
     text_tokens = [word for word in text if word not in stopwords.words('english')]
-    # stemming tokens
-    text_stems = [stemmer.stem(word) for word in text_tokens]
     # lemmatize tokens
-    cleaned = [lemmatizer.lemmatize(word) for word in text_stems]
+    cleaned = [lemmatizer.lemmatize(word) for word in text_tokens]
     return cleaned
 
 
 def build_model():
     '''
     Function: 
-        Builds classifier pipeline with the best hyperparameters and StartingVerbExtractor and returns it.
+        Runs a GridSearch on a classifier pipeline and returns the best classifier.
     Arg:
          N/A.
     Return:
-        model (BaseEstimator): Instance of the built pipeline.
+        model (BaseEstimator): best classifier found by GridSearch.
     '''
     # defining hyperparameter for the MultiOutputClassifier.
-    params =  {'n_estimators': 200, 'min_samples_split': 4}
+    params =    {
+        'classifier__estimator__n_estimators': [100, 200],
+        'classifier__estimator__min_samples_split': [2, 4]
+                }
     # instanciating pipeline with customer tokenizer and StartingVerbExtractor.
     pipeline = Pipeline([
     ('features', FeatureUnion([
         ('vec', TfidfVectorizer(tokenizer = tokenize)),
         ('starting_verb', StartingVerbExtractor())
     ])),
-    ('classifier', MultiOutputClassifier(RandomForestClassifier(**params)))
+    ('classifier', MultiOutputClassifier(RandomForestClassifier()))
                         ])
-    return(pipeline)
+    # running GridSearch with params and scoring with F1 micro-score
+    model = GridSearchCV(pipeline, param_grid=params, verbose=3, scoring='f1_micro')
+    return(model)
 
 def evaluate_model(model, X_test, Y_test, category_names):
     '''
