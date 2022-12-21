@@ -58,3 +58,5 @@ and to differentiate examples from this class from the majority classes.
 
 ### Acknowledgements
 Udacity Data Scientist Nanodegree Program
+
+This project was done together with Florian Binderreif. 
